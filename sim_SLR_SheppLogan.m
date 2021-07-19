@@ -46,37 +46,4 @@ for i = 1:Nc
 end
 
 d2  = reshape(d2,gap,[],Nc);
-
-%% Display Result for first 4 coils
-figure(100);clf;
-
-% subsample spokes for display
-idx = 1:10:size(d0,2);
-
-for i = 1:gap
-    for j = 1:4
-        % Magnitude
-        subplot(2*gap, 4, 2*(i-1)*4 + j);
-        hold on;
-        scatter(1:length(idx),abs(d0(gap+1-i,idx,j)), 5, 'filled');
-        scatter(1:length(idx),abs(d2(gap+1-i,idx,j)), 5, 'filled');
-        
-        if j==1
-            ylabel(sprintf('k%d Mag',gap+1-i));
-        end
-        if i==1
-            title(sprintf('Channel %d',j));
-        end
-        
-        % Phase
-        subplot(2*gap, 4, 2*(i-1)*4 + 4 + j);
-        hold on;
-        scatter(1:length(idx),angle(d0(gap+1-i,idx,j)), 5, 'filled');
-        scatter(1:length(idx),angle(d2(gap+1-i,idx,j)), 5, 'filled');
-        ylim([-pi pi]);
-        
-        if j==1
-            ylabel(sprintf('k%d Phs',gap+1-i));
-        end
-    end
-end
+shell_plots(d0, d2, gap, 16, 3);
